@@ -1,12 +1,25 @@
-import {startGame} from "../../game/Game";
-import {mapFromId} from "../../map/MapRegistry";
-import {closeMenu} from "../ModuleLoader";
-import {openMenu} from "../ModuleLoader";
+import { gameTicker, GameTickListener } from "../../game/GameTicker";
+import { formatTime } from "../../util/StringFormatter";
+import { ModuleAdapter } from "../ModuleLoader";
 
-(window as any).commandShowSettings = function () {
-	alert("Nothing to see here yet XD");
-};
+class ClockListener implements GameTickListener {
+	tick() {
+		lblGameTime.innerHTML = formatTime(gameTicker.getElapsedIngameTime());
+	}
+}
+
+const lblGameTime: HTMLElement = (window.document.getElementById("lblGameTime") as HTMLElement);
+const clockListener: ClockListener = new ClockListener();
+
+export default {
+	onOpen: () => {
+		gameTicker.registry.register(clockListener);
+	}
+} as ModuleAdapter;
 
 (window as any).commandExitGame = function () {
 	window.location.reload();
 };
+
+
+

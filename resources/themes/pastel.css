@@ -24,6 +24,19 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Overpass Mono';
+    src: url(/resources/themes/overpass-mono-regular.woff) format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Overpass Mono';
+    src: url(/resources/themes/overpass-mono-bold.woff) format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
 
 /* Global variables */
 
@@ -227,7 +240,26 @@ p {
     justify-items: flex-end;
     justify-content: flex-end;
     pointer-events: all;
+    gap: 0.375em;
 }
+
+.wf-hud-gametime {
+    font-family: 'Overpass Mono';
+    display: block;
+    width: 8em;
+    height: 2.625em;
+    color: var(--color-light);
+    font-weight: bold;
+    border-radius: 2em;
+    background-color: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-medium);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+}
+
 
 /* Layout elements */
 
