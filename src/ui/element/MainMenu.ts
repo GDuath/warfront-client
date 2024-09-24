@@ -1,5 +1,5 @@
 import {mapFromId} from "../../map/MapRegistry";
-import {getSetting, updateSetting} from "../../util/UserSettingManager";
+import {getSetting, registerSettingListener, updateSetting} from "../../util/UserSettingManager";
 import {startGame} from "../../game/Game";
 import {gameModeFromId} from "../../game/mode/GameModeRegistry";
 import {GameModeIds} from "../../network/protocol/util/GameTypeIds";
@@ -19,6 +19,7 @@ const playerNameValidationExp: RegExp = /^[a-zA-Z0-9\u00A0-\u00FF\u0100-\u024F\u
 registerClickListener("btnStartSingleplayer", () => {
 	hideAllUIElements();
 	showUIElement("GameHud");
+	showUIElement("TroopControl");
 	startGame(mapFromId(Math.floor(Math.random() * 2)), gameModeFromId(GameModeIds.FFA), 23452345, [{name: getSetting("player-name")}], 0, true);
 });
 
