@@ -5,6 +5,7 @@ import {spawnManager} from "../player/SpawnManager";
 import {boatManager} from "../boat/BoatManager";
 import {territoryManager} from "../TerritoryManager";
 import {hasBorderWith, preprocessAttack} from "../attack/AttackActionValidator";
+import {getSetting} from "../../util/UserSettingManager";
 
 /**
  * Default map click action handler.
@@ -17,7 +18,7 @@ class MapActionHandler implements ClickEventListener {
 	 * Enables the map action handler.
 	 */
 	enable() {
-		this.setAction(tile => spawnManager.isSelecting ? spawnManager.requestSpawn(tile) : hasBorderWith(clientPlayer, territoryManager.getOwner(tile)) ? preprocessAttack(clientPlayer.id, territoryManager.getOwner(tile), 200) : boatManager.requestBoat(tile, 200));
+		this.setAction(tile => spawnManager.isSelecting ? spawnManager.requestSpawn(tile) : hasBorderWith(clientPlayer, territoryManager.getOwner(tile)) ? preprocessAttack(clientPlayer.id, territoryManager.getOwner(tile), getSetting("attack-power") * 1000) : boatManager.requestBoat(tile, getSetting("attack-power") * 1000));
 		interactionManager.click.register(this);
 	}
 
